@@ -105,10 +105,10 @@ void app()
   //   【宿題】これを Projection Shadow 用の変換行列に置き換える
   const GLfloat m[] =
   {
-      1.0f,   0.0f,   0.0f,   0.0f,
-      0.0f,   0.0f,   0.0f,   0.0f,
-      0.0f,   0.0f,   1.0f,   0.0f,
-      0.0f,   0.0f,   0.0f,   1.0f
+       lp[1],   0.0f,     0.0f,    0.0f,
+      -lp[0],   0.0f,   -lp[2],   -1.0f,
+        0.0f,   0.0f,    lp[1],    0.0f,
+        0.0f,   0.0f,     0.0f,   lp[1]
   };
   const GgMatrix ms(m);
 
@@ -166,8 +166,8 @@ void app()
 
       // 影の描画 (楕円は XY 平面上にあるので X 軸中心に -π/2 回転)
       //   【宿題】楕円の代わりに影を落とす図形そのものを描く (-π/2 回転は不要)
-      shader.loadModelviewMatrix(mv * ms * ma * ggRotateX(-1.570796f));
-      ellipse->draw();
+      shader.loadModelviewMatrix(mv * ms * ma);
+      object ->draw();
     }
     glEnable(GL_DEPTH_TEST);
 
